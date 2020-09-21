@@ -5,4 +5,5 @@ from VideoLib import views
 app_name = 'VideoLib'
 urlpatterns = [
     path('test.py', views.test, name='test'),
+    path('register.py', views.register, name='register'),
 ]
