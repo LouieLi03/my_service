@@ -76,7 +76,7 @@ DATABASES = {
         'NAME': 'my_service',
         'USER': 'root',
         'PASSWORD': 'Welcome123',
-        'HOST': '106.54.182.207',
+        'HOST': '127.0.0.1',
         'PORT': 3306,
     }
 }
