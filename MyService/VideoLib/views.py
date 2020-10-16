@@ -119,19 +119,33 @@ def updateUserInfo(request):
                 user = user.first()
 
                 avatar_tuple = request.POST.get("avatar"),
-                if len(avatar_tuple):
+                if avatar_tuple:
                     avatar = avatar_tuple[0]
-                    user.avatar = avatar
+                    if avatar:
+                        user.avatar = avatar
 
                 username_tuple = request.POST.get("username"),
-                if len(username_tuple):
+                if username_tuple:
                     username = username_tuple[0]
-                    user.username = username
+                    if username:
+                        temp_user = User.objects.filter(username=username)
+                        if temp_user.exists():
+                            data["msg"] = "用户名重复"
+                            return JsonResponse(data=data)
+                        else:
+                            user.username = username
 
-                mobile_no_tuple = request.POST.get("mobile_no"),
-                if len(mobile_no_tuple):
+                mobile_no_tuple = request.POST.get("mobileNo"),
+                if mobile_no_tuple:
                     mobile_no = mobile_no_tuple[0]
-                    user.mobile_no = mobile_no
+                    if mobile_no:
+                        user.mobile_no = mobile_no
+
+                sex_tuple = request.POST.get("sex"),
+                if sex_tuple:
+                    sex = sex_tuple[0]
+                    if sex:
+                        user.sex = sex
 
                 user.save()
                 data["msg"] = "修改信息成功！"
